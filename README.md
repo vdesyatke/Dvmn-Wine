@@ -8,8 +8,6 @@
 1. Склонируйте проект к себе на компьютер, [подробнее](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 2. Установите, запустите и активируйте виртуальное окружение, [подробнее](https://docs.python-guide.org/dev/virtualenvs/).
 3. Чтобы установить зависимости, запустите ```pip install -r requirements.txt```.
-4. Сгенерируйте свой bit.ly токен [здесь](https://app.bitly.com/settings/api/)
-5. В корневой директории проекта создайте новый файл с названием `.env`, поместите в него строчку вида `BITLY_TOKEN={ваш токен}`.
 
 
 ## Запуск
