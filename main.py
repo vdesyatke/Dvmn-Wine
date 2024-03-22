@@ -5,38 +5,43 @@ from auxiliary_functions import years_declined
 import pandas as pd
 
 
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
-
-template = env.get_template('template.html')
-
 FOUNDATION_YEAR = 1920
 
-age_of_winery = date.today().year - FOUNDATION_YEAR
-age_of_winery = years_declined(age_of_winery)
 
-wines_df = pd.read_excel(
-    'wine3.xlsx',
-    na_values='None',
-    keep_default_na=False,
-)
+def main():
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
 
-wines = dict()
-for category in wines_df['Категория'].unique():
-    df = wines_df[wines_df['Категория'] == category]\
-        .drop(columns=['Категория'])
-    wines[category] = df.to_dict(orient='records')
+    template = env.get_template('template.html')
 
-rendered_page = template.render(
-    age_of_winery=age_of_winery,
-    wines=wines,
-)
+    age_of_winery = date.today().year - FOUNDATION_YEAR
+    age_of_winery = years_declined(age_of_winery)
 
-with open('index.html', 'w', encoding="utf8") as file:
-    file.write(rendered_page)
+    wines_df = pd.read_excel(
+        'wine3.xlsx',
+        na_values='None',
+        keep_default_na=False,
+    )
+
+    wines = dict()
+    for category in wines_df['Категория'].unique():
+        df = wines_df[wines_df['Категория'] == category]\
+            .drop(columns=['Категория'])
+        wines[category] = df.to_dict(orient='records')
+
+    rendered_page = template.render(
+        age_of_winery=age_of_winery,
+        wines=wines,
+    )
+
+    with open('index.html', 'w', encoding="utf8") as file:
+        file.write(rendered_page)
+
+    server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
+    server.serve_forever()
 
 
-server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
-server.serve_forever()
+if __name__ == '__main__':
+    main()
