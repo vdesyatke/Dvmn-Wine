@@ -1,7 +1,7 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import date
-from auxiliary_functions import years_declined
+from auxiliary_functions import decline_years
 import pandas as pd
 
 
@@ -17,7 +17,7 @@ def main():
     template = env.get_template('template.html')
 
     age_of_winery = date.today().year - FOUNDATION_YEAR
-    age_of_winery = years_declined(age_of_winery)
+    age_of_winery = decline_years(age_of_winery)
 
     wines_df = pd.read_excel(
         'wine3.xlsx',
