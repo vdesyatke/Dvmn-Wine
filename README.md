@@ -23,11 +23,11 @@ python3 main.py
 
 Если необходимо указать свой xlsx-файл с базой данных продуктов вместо используемого по умолчанию:
 ```python
-python main.py -f [XLS FILE]
+python3 main.py -f [XLS FILE]
 ```
 или 
 ```python
-python main.py --xls_file [XLS FILE]
+python3 main.py --xls_file [XLS FILE]
 ```
 
 Работающий сайт выглядит примерно так:
