@@ -12,7 +12,7 @@ FOUNDATION_YEAR = 1920
 def create_parser():
     description = '''Сайт магазина авторского вина "Новое русское вино".'''
     parser = argparse.ArgumentParser(description=description)
-    h = 'Путь к xlsx-файлу с базой данных продукции'
+    h = 'Путь к xls-файлу с базой данных продукции'
     parser.add_argument('-f', '--xls_file', help=h, default='wine3.xlsx')
     return parser
 
