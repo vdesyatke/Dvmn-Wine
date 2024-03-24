@@ -37,11 +37,14 @@ def main():
         keep_default_na=False,
     )
 
-    wines = dict()
-    for category in wines_df['Категория'].unique():
-        df = wines_df[wines_df['Категория'] == category]\
+    wines = {
+        category: (
+            wines_df[wines_df['Категория'] == category]
             .drop(columns=['Категория'])
-        wines[category] = df.to_dict(orient='records')
+            .to_dict(orient='records')
+        )
+        for category in wines_df['Категория'].unique()
+    }
 
     rendered_page = template.render(
         age_of_winery=age_of_winery,
